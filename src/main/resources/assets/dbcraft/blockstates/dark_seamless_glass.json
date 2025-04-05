@@ -1,0 +1,9 @@
+{
+	"multipart": [
+		{
+			"apply": {
+				"model": "dbcraft:block/dark_seamless_glass"
+			}
+		}
+	]
+}
