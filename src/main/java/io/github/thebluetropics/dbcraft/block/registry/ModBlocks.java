@@ -24,6 +24,21 @@ public class ModBlocks {
 				.blockVision(Blocks::never)
 		)
 	);
+	public static final Block SEAMLESS_GLASS = register(
+		"seamless_glass",
+		new TransparentBlock(
+			AbstractBlock.Settings.create()
+				.mapColor(MapColor.CLEAR)
+				.instrument(Instrument.HAT)
+				.strength(0.3F)
+				.sounds(BlockSoundGroup.GLASS)
+				.nonOpaque()
+				.allowsSpawning(Blocks::never)
+				.solidBlock(Blocks::never)
+				.suffocates(Blocks::never)
+				.blockVision(Blocks::never)
+		)
+	);
 
 	public static <T extends Block> T register(String id, T block) {
 		return Registry.register(Registries.BLOCK, Identifier.of(DubacraftMod.ID, id), block);

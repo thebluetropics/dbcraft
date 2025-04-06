@@ -2,6 +2,7 @@ package io.github.thebluetropics.dbcraft.item.registry;
 
 import io.github.thebluetropics.dbcraft.DubacraftMod;
 import io.github.thebluetropics.dbcraft.block.registry.ModBlocks;
+import io.github.thebluetropics.dbcraft.item.WrenchItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -13,6 +14,13 @@ public class ModItems {
 		"dark_seamless_glass",
 		new BlockItem(
 			ModBlocks.DARK_SEAMLESS_GLASS,
+			new Item.Settings()
+		)
+	);
+	public static final Item SEAMLESS_GLASS = register(
+		"seamless_glass",
+		new BlockItem(
+			ModBlocks.SEAMLESS_GLASS,
 			new Item.Settings()
 		)
 	);

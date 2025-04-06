@@ -17,6 +17,7 @@ public class ModItemGroups {
 			.icon(ModItems.DARK_SEAMLESS_GLASS::getDefaultStack)
 			.entries((ctx, entries) -> {
 				entries.add(ModItems.DARK_SEAMLESS_GLASS);
+				entries.add(ModItems.SEAMLESS_GLASS);
 			})
 			.build()
 	);

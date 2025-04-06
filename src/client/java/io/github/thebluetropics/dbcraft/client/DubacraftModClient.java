@@ -13,5 +13,6 @@ public class DubacraftModClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DARK_SEAMLESS_GLASS, RenderLayer.getTranslucent());
+		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SEAMLESS_GLASS, RenderLayer.getTranslucent());
 	}
 }
