@@ -39,6 +39,26 @@ public class ModBlocks {
 				.blockVision(Blocks::never)
 		)
 	);
+	public static final Block FORTRESS_BRICKS = register(
+		"fortress_bricks",
+		new Block(
+			AbstractBlock.Settings.create()
+				.mapColor(MapColor.STONE_GRAY)
+				.instrument(Instrument.BASEDRUM)
+				.requiresTool()
+				.strength(1.5F, 6.0F)
+		)
+	);
+	public static final Block SMALL_FORTRESS_BRICKS = register(
+		"small_fortress_bricks",
+		new Block(
+			AbstractBlock.Settings.create()
+				.mapColor(MapColor.STONE_GRAY)
+				.instrument(Instrument.BASEDRUM)
+				.requiresTool()
+				.strength(1.5F, 6.0F)
+		)
+	);
 
 	public static <T extends Block> T register(String id, T block) {
 		return Registry.register(Registries.BLOCK, Identifier.of(DubacraftMod.ID, id), block);

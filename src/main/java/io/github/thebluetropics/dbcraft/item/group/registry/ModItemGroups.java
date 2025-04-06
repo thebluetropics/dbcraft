@@ -16,6 +16,8 @@ public class ModItemGroups {
 			.displayName(Text.translatable("itemGroup." + DubacraftMod.ID + ".default"))
 			.icon(ModItems.DARK_SEAMLESS_GLASS::getDefaultStack)
 			.entries((ctx, entries) -> {
+				entries.add(ModItems.FORTRESS_BRICKS);
+				entries.add(ModItems.SMALL_FORTRESS_BRICKS);
 				entries.add(ModItems.DARK_SEAMLESS_GLASS);
 				entries.add(ModItems.SEAMLESS_GLASS);
 				entries.add(ModItems.WRENCH);

@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:block",
+	"random_sequence": "dbcraft:blocks/small_fortress_bricks",
+	"pools": [
+		{
+			"bonus_rolls": 0.0,
+			"conditions": [
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			],
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "dbcraft:small_fortress_bricks"
+				}
+			],
+			"rolls": 1.0
+		}
+	]
+}

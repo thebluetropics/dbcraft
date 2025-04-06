@@ -1,6 +1,8 @@
 {
 	"block.dbcraft.dark_seamless_glass": "Dark Seamless Glass",
 	"block.dbcraft.seamless_glass": "Seamless Glass",
+	"block.dbcraft.fortress_bricks": "Fortress Bricks",
+	"block.dbcraft.small_fortress_bricks": "Small Fortress Bricks",
 	"item.dbcraft.wrench": "Wrench",
 	"itemGroup.dbcraft.default": "dbcraft"
 }

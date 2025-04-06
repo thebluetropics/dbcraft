@@ -1,0 +1,9 @@
+{
+	"multipart": [
+		{
+			"apply": {
+				"model": "dbcraft:block/small_fortress_bricks"
+			}
+		}
+	]
+}

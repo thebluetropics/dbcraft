@@ -13,10 +13,21 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-import static net.minecraft.item.Item.ATTACK_DAMAGE_MODIFIER_ID;
-import static net.minecraft.item.Item.ATTACK_SPEED_MODIFIER_ID;
-
 public class ModItems {
+	public static final Item FORTRESS_BRICKS = register(
+		"fortress_bricks",
+		new BlockItem(
+			ModBlocks.FORTRESS_BRICKS,
+			new Item.Settings()
+		)
+	);
+	public static final Item SMALL_FORTRESS_BRICKS = register(
+		"small_fortress_bricks",
+		new BlockItem(
+			ModBlocks.SMALL_FORTRESS_BRICKS,
+			new Item.Settings()
+		)
+	);
 	public static final Item DARK_SEAMLESS_GLASS = register(
 		"dark_seamless_glass",
 		new BlockItem(
