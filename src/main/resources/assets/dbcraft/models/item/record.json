@@ -1,0 +1,14 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "dbcraft:item/record"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"dbcraft:signed": 1.0
+			},
+			"model": "dbcraft:item/signed_record"
+		}
+	]
+}

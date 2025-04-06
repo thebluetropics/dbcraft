@@ -1,6 +1,7 @@
 package io.github.thebluetropics.dbcraft;
 
 import io.github.thebluetropics.dbcraft.block.registry.ModBlocks;
+import io.github.thebluetropics.dbcraft.component.ModDataComponentTypes;
 import io.github.thebluetropics.dbcraft.item.group.registry.ModItemGroups;
 import io.github.thebluetropics.dbcraft.item.registry.ModItems;
 import net.fabricmc.api.ModInitializer;
@@ -16,5 +17,6 @@ public class DubacraftMod implements ModInitializer {
 		ModBlocks.initialize();
 		ModItems.initialize();
 		ModItemGroups.initialize();
+		ModDataComponentTypes.initialize();
 	}
 }

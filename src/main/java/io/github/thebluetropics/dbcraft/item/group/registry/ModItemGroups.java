@@ -21,6 +21,7 @@ public class ModItemGroups {
 				entries.add(ModItems.DARK_SEAMLESS_GLASS);
 				entries.add(ModItems.SEAMLESS_GLASS);
 				entries.add(ModItems.WRENCH);
+				entries.add(ModItems.EMPTY_RECORD);
 			})
 			.build()
 	);

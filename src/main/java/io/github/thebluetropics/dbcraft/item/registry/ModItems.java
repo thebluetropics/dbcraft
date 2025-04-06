@@ -2,6 +2,8 @@ package io.github.thebluetropics.dbcraft.item.registry;
 
 import io.github.thebluetropics.dbcraft.DubacraftMod;
 import io.github.thebluetropics.dbcraft.block.registry.ModBlocks;
+import io.github.thebluetropics.dbcraft.item.EmptyRecordItem;
+import io.github.thebluetropics.dbcraft.item.RecordItem;
 import io.github.thebluetropics.dbcraft.item.WrenchItem;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
@@ -12,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 public class ModItems {
 	public static final Item FORTRESS_BRICKS = register(
@@ -72,6 +75,21 @@ public class ModItems {
 						)
 						.build()
 				)
+		)
+	);
+	public static final Item EMPTY_RECORD = register(
+		"empty_record",
+		new EmptyRecordItem(
+			new Item.Settings()
+				.maxCount(1)
+		)
+	);
+	public static final Item RECORD = register(
+		"record",
+		new RecordItem(
+			new Item.Settings()
+				.maxCount(1)
+				.rarity(Rarity.UNCOMMON)
 		)
 	);
 

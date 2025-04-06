@@ -4,5 +4,8 @@
 	"block.dbcraft.fortress_bricks": "Fortress Bricks",
 	"block.dbcraft.small_fortress_bricks": "Small Fortress Bricks",
 	"item.dbcraft.wrench": "Wrench",
+	"item.dbcraft.empty_record": "Empty Record",
+	"item.dbcraft.record": "Record",
+	"item.dbcraft.record.signed": "Signed Record",
 	"itemGroup.dbcraft.default": "dbcraft"
 }
