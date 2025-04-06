@@ -28,7 +28,6 @@ public class ModBlocks {
 		"seamless_glass",
 		new TransparentBlock(
 			AbstractBlock.Settings.create()
-				.mapColor(MapColor.CLEAR)
 				.instrument(Instrument.HAT)
 				.strength(0.3F)
 				.sounds(BlockSoundGroup.GLASS)
