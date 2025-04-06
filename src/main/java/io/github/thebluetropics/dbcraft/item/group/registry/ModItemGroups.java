@@ -18,6 +18,7 @@ public class ModItemGroups {
 			.entries((ctx, entries) -> {
 				entries.add(ModItems.DARK_SEAMLESS_GLASS);
 				entries.add(ModItems.SEAMLESS_GLASS);
+				entries.add(ModItems.WRENCH);
 			})
 			.build()
 	);
