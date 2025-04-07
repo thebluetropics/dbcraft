@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
+import static io.github.thebluetropics.dbcraft.component.ModDataComponentTypes.RECORD_DATA;
 import static io.github.thebluetropics.dbcraft.component.ModDataComponentTypes.SIGNED;
 
 public class RecordItem extends Item {
@@ -54,11 +55,17 @@ public class RecordItem extends Item {
 		var stack = player.getStackInHand(hand);
 		ItemStack other_stack = player.getStackInHand(hand.equals(Hand.MAIN_HAND) ? Hand.OFF_HAND : Hand.MAIN_HAND);
 
-		if (other_stack.isOf(Items.DIAMOND) && Objects.equals(stack.get(SIGNED), false)) {
-			stack.set(SIGNED, true);
-			other_stack.decrementUnlessCreative(1, player);
+		var record_data = stack.get(RECORD_DATA);
 
-			return TypedActionResult.success(stack);
+		if (record_data != null) {
+			if (!record_data.issuer_uuid.equals(player.getUuid())) {
+				if (other_stack.isOf(Items.DIAMOND) && Objects.equals(stack.get(SIGNED), false)) {
+					stack.set(SIGNED, true);
+					other_stack.decrementUnlessCreative(1, player);
+
+					return TypedActionResult.success(stack);
+				}
+			}
 		}
 
 		return super.use(world, player, hand);
