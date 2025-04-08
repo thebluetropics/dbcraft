@@ -2,11 +2,14 @@ package io.github.thebluetropics.dbcraft.item;
 
 import io.github.thebluetropics.dbcraft.DubacraftMod;
 import io.github.thebluetropics.dbcraft.component.ModDataComponentTypes;
+import io.github.thebluetropics.dbcraft.component.PersistentPlayerReference;
+import io.github.thebluetropics.dbcraft.component.RecordData;
 import net.minecraft.client.item.TooltipType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -19,6 +22,8 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 import static io.github.thebluetropics.dbcraft.component.ModDataComponentTypes.RECORD_DATA;
 import static io.github.thebluetropics.dbcraft.component.ModDataComponentTypes.SIGNED;
@@ -42,11 +47,24 @@ public class RecordItem extends Item {
 				.atZone(ZoneId.systemDefault())
 				.toLocalDate();
 
-			tooltip.add(Text.literal(data.issuer_name).formatted(Formatting.GRAY));
+			MutableText first_line = Text.literal("from").formatted(Formatting.DARK_GRAY);
+			first_line.append(Text.literal(" "));
+			first_line.append(Text.literal(data.issuer.name).formatted(Formatting.GRAY));
+
+			PersistentPlayerReference recipient = data.recipient.orElse(null);
+
+			if (recipient != null) {
+				first_line.append(Text.literal(" for ").formatted(Formatting.DARK_GRAY));
+				first_line.append(Text.literal(recipient.name).formatted(Formatting.GRAY));
+			}
+
+			MutableText second_line = Text.literal("at ").formatted(Formatting.DARK_GRAY);
+			second_line.append(Text.literal(date.format(DateTimeFormatter.ISO_LOCAL_DATE)).formatted(Formatting.GRAY));
+
+			tooltip.add(first_line);
+			tooltip.add(second_line);
 			tooltip.add(Text.empty());
-			tooltip.add(Text.literal(data.text).formatted(Formatting.GRAY));
-			tooltip.add(Text.empty());
-			tooltip.add(Text.literal(date.format(DateTimeFormatter.ISO_LOCAL_DATE)).formatted(Formatting.GRAY));
+			tooltip.add(Text.literal(data.text).formatted(Formatting.DARK_GRAY));
 		}
 	}
 
@@ -58,12 +76,37 @@ public class RecordItem extends Item {
 		var record_data = stack.get(RECORD_DATA);
 
 		if (record_data != null) {
-			if (!record_data.issuer_uuid.equals(player.getUuid())) {
-				if (other_stack.isOf(Items.DIAMOND) && Objects.equals(stack.get(SIGNED), false)) {
+			if (record_data.issuer.uuid.equals(player.getUuid())) {
+				// sign the record
+				if (other_stack.isOf(Items.DIAMOND) && !Objects.equals(stack.get(SIGNED), true)) {
 					stack.set(SIGNED, true);
 					other_stack.decrementUnlessCreative(1, player);
 
 					return TypedActionResult.success(stack);
+				}
+
+				// assign a recipient to the record
+				if (other_stack.isOf(Items.WRITABLE_BOOK) && !Objects.equals(stack.get(SIGNED), true) && Objects.equals(record_data.recipient, Optional.empty())) {
+					String book_content = EmptyRecordItem.get_book_content(other_stack);
+
+					if (book_content != null) {
+						if (!world.isClient) {
+							PlayerEntity recipient = world.getServer().getPlayerManager().getPlayer(book_content);
+
+							if (recipient != null) {
+								var new_record_data = new RecordData(
+									record_data.issuer,
+									Optional.of(new PersistentPlayerReference(recipient.getUuid(), recipient.getName().getLiteralString())),
+									record_data.timestamp,
+									record_data.text
+								);
+
+								stack.set(RECORD_DATA, new_record_data);
+
+								return TypedActionResult.success(stack);
+							}
+						}
+					}
 				}
 			}
 		}

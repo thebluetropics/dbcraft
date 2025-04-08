@@ -1,6 +1,7 @@
 package io.github.thebluetropics.dbcraft.item;
 
 import io.github.thebluetropics.dbcraft.component.ModDataComponentTypes;
+import io.github.thebluetropics.dbcraft.component.PersistentPlayerReference;
 import io.github.thebluetropics.dbcraft.component.RecordData;
 import io.github.thebluetropics.dbcraft.item.registry.ModItems;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,6 +13,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static net.minecraft.component.DataComponentTypes.WRITABLE_BOOK_CONTENT;
 
@@ -40,8 +42,8 @@ public class EmptyRecordItem extends Item {
 					var modified_stack = new ItemStack(ModItems.RECORD);
 					modified_stack.set(ModDataComponentTypes.SIGNED, false);
 					modified_stack.set(ModDataComponentTypes.RECORD_DATA, new RecordData(
-						player.getUuid(),
-						player.getName().getString(),
+						new PersistentPlayerReference(player.getUuid(), player.getName().getLiteralString()),
+						Optional.empty(),
 						System.currentTimeMillis() / 1000l,
 						text
 					));
@@ -52,5 +54,26 @@ public class EmptyRecordItem extends Item {
 		}
 
 		return super.use(world, player, hand);
+	}
+
+	// todo: refactor and rename
+	public static String get_book_content(ItemStack stack) {
+		var book_content = stack.get(WRITABLE_BOOK_CONTENT);
+
+		if (book_content != null) {
+			ArrayList<String> texts = new ArrayList<>();
+
+			for (var page : book_content.pages()) {
+				texts.add(page.get(false));
+			}
+
+			var text = String.join("", texts).replaceAll("\r?\n", "").replaceAll("\\s+", " ").trim();
+
+			if (!text.isBlank()) {
+				return text;
+			}
+		}
+
+		return null;
 	}
 }
