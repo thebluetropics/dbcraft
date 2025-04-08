@@ -6,3 +6,4 @@ A core modifications for dbcraft by [@thebluetropics](https://github.com/theblue
 - [ ] Seamless Glass
 - [ ] Dark Seamless Glass
 - [ ] Wrench
+- [ ] Records
